@@ -1,0 +1,11 @@
+SECRET_KEY='CHANGE_ME'
+DEBUG=True
+INSTALLED_APPS=[
+ 'django.contrib.auth',
+ 'django.contrib.contenttypes',
+ 'rest_framework',
+ 'payments',
+ 'ai',
+ 'whatsapp'
+]
+ROOT_URLCONF='core.urls'
