@@ -58,10 +58,3 @@
         </plugins>
     </build>
 </project>
-```
-
-### 5. **En VS Code, ejecuta:**
-
-`Ctrl+Shift+P` → Escribe:
-```
-Java: Clean Java Language Server Workspace
