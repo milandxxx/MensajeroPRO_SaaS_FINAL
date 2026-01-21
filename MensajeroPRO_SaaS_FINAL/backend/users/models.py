@@ -67,6 +67,15 @@ class User(AbstractUser):
 class Business(models.Model):
     """Business/Negocio model."""
     
+    BUSINESS_TYPES = [
+        ('generic', 'Genérico'),
+        ('transport', 'TransportePRO'),
+        ('restaurant', 'RestaurantePRO'),
+        ('store', 'TiendaPRO'),
+        ('medical', 'MedicoPRO'),
+        ('barbershop', 'BarberiaPRO'),
+    ]
+    
     owner = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -75,6 +84,7 @@ class Business(models.Model):
     
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
+    business_type = models.CharField(max_length=20, choices=BUSINESS_TYPES, default='generic')
     
     # WhatsApp configuration
     whatsapp_number = models.CharField(max_length=20, blank=True)
@@ -98,7 +108,8 @@ class Business(models.Model):
         ordering = ['-created_at']
         indexes = [
             models.Index(fields=['owner', '-created_at']),
+            models.Index(fields=['business_type']),
         ]
     
     def __str__(self):
-        return f"{self.name} (Owner: {self.owner.username})"
+        return f"{self.name} ({self.get_business_type_display()}) - {self.owner.username}"
